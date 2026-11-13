@@ -1,0 +1,72 @@
+[
+ {
+  "item": "Acurácia no teste",
+  "status": "ok",
+  "evidencia": "0.979 (meta ≥ 0.97)"
+ },
+ {
+  "item": "Acurácia no teste limpo (sem quase-duplicatas)",
+  "status": "ok",
+  "evidencia": "0.977 em 570 imagens"
+ },
+ {
+  "item": "Menor recall entre as classes (teste)",
+  "status": "ok",
+  "evidencia": "0.960 (meningioma; meta ≥ 0.95)"
+ },
+ {
+  "item": "Sensibilidade para tumor (teste)",
+  "status": "ok",
+  "evidencia": "0.992 (meta ≥ 0.99)"
+ },
+ {
+  "item": "AUC macro (teste)",
+  "status": "ok",
+  "evidencia": "0.9984 (meta ≥ 0.99)"
+ },
+ {
+  "item": "Log-loss (teste)",
+  "status": "ok",
+  "evidencia": "0.078 (meta ≤ 0.15; base 1.39)"
+ },
+ {
+  "item": "Calibração: ECE (teste)",
+  "status": "ok",
+  "evidencia": "0.0050 (meta ≤ 0.03)"
+ },
+ {
+  "item": "Variância: gap treino − validação",
+  "status": "ok",
+  "evidencia": "2.84 p.p. (meta ≤ 3)"
+ },
+ {
+  "item": "Estabilidade: |gap validação − teste|",
+  "status": "ok",
+  "evidencia": "0.84 p.p. (meta ≤ 2)"
+ },
+ {
+  "item": "Divisão estratificada",
+  "status": "ok",
+  "evidencia": "maior diferença de proporção 1.5 p.p. (χ² p = 0.42)"
+ },
+ {
+  "item": "Duplicatas entre treino e teste",
+  "status": "atencao",
+  "evidencia": "101 imagens de teste (14.8%) com par no treino"
+ },
+ {
+  "item": "Atalhos de aquisição (atributos triviais)",
+  "status": "falha",
+  "evidencia": "atributos triviais preveem 0.93 (acaso 0.25)"
+ },
+ {
+  "item": "Robustez: queda média de acurácia",
+  "status": "falha",
+  "evidencia": "20.5 p.p. (meta ≤ 10)"
+ },
+ {
+  "item": "Determinismo (2 execuções iguais)",
+  "status": "ok",
+  "evidencia": "dif. máx. 0e+00"
+ }
+]

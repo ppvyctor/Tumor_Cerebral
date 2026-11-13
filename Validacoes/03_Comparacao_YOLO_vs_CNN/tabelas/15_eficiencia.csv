@@ -1,0 +1,6 @@
+﻿index,YOLO11s-cls,EfficientNet-B0,Razão CNN/YOLO
+Parâmetros (milhões),5.45,4.01,0.7357798165137615
+GFLOPs por imagem,7.71,4.01,0.5201037613488975
+Arquivo de pesos (MB),11.04,16.35,1.4809782608695654
+"Latência mediana do modelo (ms, CPU)",76.7,136.3,1.7770534550195567
+Tempo de treino (min),801.2,230.5,0.28769345981028455

@@ -1,0 +1,14 @@
+{
+  "modelo": "efficientnet_b0",
+  "img_size": 512,
+  "classes": [
+    "glioma",
+    "meningioma",
+    "notumor",
+    "pituitary"
+  ],
+  "melhor_acc_val": 0.9883973894126178,
+  "epocas_treinadas": 100,
+  "tempo_treino_min": 230.5368213891983,
+  "n_params": 4012672
+}

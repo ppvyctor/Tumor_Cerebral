@@ -1,0 +1,12 @@
+,YOLO11s-cls
+Épocas,93
+Melhor época,63
+Menor loss de treino,0.0122
+Loss de treino final,0.01374
+Menor loss valid,0.11184
+Época da menor loss valid,60
+LR inicial,9.93377e-05
+LR final,7.6654e-06
+Tempo total (min),801.2333333333333
+Épocas c/ loss de treino subindo >30%,0
+Parou por early stopping,True

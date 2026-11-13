@@ -1,0 +1,128 @@
+[
+ {
+  "arquivo": "01_dados.png",
+  "titulo": "Conjunto de dados: classes, divisão e exemplos",
+  "mostra": "Proporção de cada classe dentro de treino, validação e teste, o tamanho de cada conjunto e um exemplo de cada classe (512×512, tons de cinza).",
+  "ler": "Barras de uma mesma classe com alturas parecidas nos três conjuntos indicam divisão estratificada; classes próximas de 25% indicam conjunto balanceado, caso em que a acurácia é uma métrica adequada.",
+  "resultado": "6879 imagens (Roboflow, CC BY 4.0): treino 4819, validação 1379, teste 681. A maior diferença de proporção entre conjuntos é 1.5 p.p. (χ² p = 0.42: sem evidência de diferença). Razão entre a maior e a menor classe no treino: 1.08."
+ },
+ {
+  "arquivo": "02_vazamento_duplicatas.png",
+  "titulo": "Vazamento: imagens de teste quase idênticas às do treino",
+  "mostra": "Histograma da diferença de pixel entre cada imagem de teste e a mais parecida do treino (miniaturas 32×32), exemplos de pares e a acurácia do modelo no teste completo, no teste limpo (sem quase-duplicatas) e só nas imagens que têm par.",
+  "ler": "O pico perto de 0 são imagens praticamente idênticas às do treino: vazamento. Se a acurácia no teste limpo for próxima à do completo, o vazamento inflou pouco o resultado.",
+  "resultado": "101 imagens de teste (14.8%) têm quase-duplicata no treino (e 14.4% da validação); o rótulo do par é o mesmo em 100% dos casos. Acurácia de YOLO11s-cls: 0.979 no teste completo, 0.977 no teste limpo (570 imagens) e 0.991 nas imagens com par."
+ },
+ {
+  "arquivo": "03_auditoria_atalhos.png",
+  "titulo": "Auditoria de atalhos: o que atributos triviais da imagem conseguem prever",
+  "mostra": "Matriz de confusão (teste) de um classificador que só enxerga 18 atributos triviais da imagem (brilho, contraste, fração de fundo preto, tamanho do crânio, bordas, cantos) e os atributos que mais pesam para ele.",
+  "ler": "Se atributos que nada dizem sobre tumor preveem bem a classe, a origem/aquisição das imagens está correlacionada com o rótulo e um modelo profundo pode estar usando esse atalho. Perto de 25% (acaso) indica ausência de atalho simples.",
+  "resultado": "O modelo de atalhos acerta 0.93 no teste (0.92 no teste limpo, 0.91 na validação), contra 0.25 do acaso. Atributos mais úteis: desvio, borda superior, borda inferior. Leitura: alerta: há sinais fortes de atalhos de aquisição. Isso não prova que YOLO11s-cls use esses atalhos, mas cerca de 93% da tarefa pode ser resolvida sem olhar a lesão: o ganho do modelo sobre o atalho é ≈5 p.p. Validar em imagens de outra origem é o próximo passo."
+ },
+ {
+  "arquivo": "04_treinamento.png",
+  "titulo": "Treinamento: loss, taxa de aprendizado e acurácia de validação",
+  "mostra": "Loss de treino (linear e log), taxa de aprendizado por época, loss de treino × validação, acurácia de validação com a faixa de empate e a melhor época, e a loss de validação sobreposta ao LR.",
+  "ler": "Loss de treino caindo sem picos indica otimização estável. Loss de validação que se estabiliza (sem subir) indica ausência de sobreajuste acentuado. O pico da validação não decide sozinho: dentro da faixa de empate o ponto mais cedo é equivalente.",
+  "resultado": "93 épocas, melhor na 63ª (validação 0.9710); platô a partir da época 49; otimismo da escolha da melhor época ≈ 0.31 p.p. (melhor valor menos a média da fase final). Picos da loss de treino (alta de mais de 30% e de mais de 0,02 entre épocas): 0. Tempo de treino 801 min (CPU)."
+ },
+ {
+  "arquivo": "05_acuracia_por_epoca.png",
+  "titulo": "Acurácia de treino e de validação por época — YOLO11s-cls",
+  "mostra": "A acurácia de validação a cada época, a acurácia de treino do melhor checkpoint medida agora e as losses de treino e validação (o treino do YOLO não registrou a acurácia de treino por época).",
+  "ler": "Treino subindo e validação ficando para trás indica sobreajuste (variância alta); as duas curvas próximas e estáveis indicam boa generalização. A acurácia de treino por época é medida com augmentation e dropout ligados, por isso fica um pouco abaixo da medida em modo inferência.",
+  "resultado": "O treino do YOLO não gravou a acurácia de treino por época, então só a validação aparece como curva (de 0.856 na época 1 a 0.971 na melhor época, 63). A acurácia de treino do melhor checkpoint, medida agora sem augmentation, é 0.9994: gap de 2.84 p.p. em relação à validação. As losses (painel direito) mostram o mesmo padrão: a de treino continua caindo e a de validação se estabiliza. Para obter a curva completa seria preciso retreinar registrando a métrica (≈13 h em CPU)."
+ },
+ {
+  "arquivo": "06_desempenho_variancia.png",
+  "titulo": "Desempenho em treino, validação e teste e diagnóstico de variância",
+  "mostra": "Acurácia em cada conjunto com intervalo de confiança, taxa de erro em escala log e, abaixo, a evolução do gap de generalização (acurácia treino × validação no caso da CNN, razão entre as losses no caso do YOLO).",
+  "ler": "Treino muito acima da validação indica sobreajuste. Validação próxima do teste indica estimativa estável. Intervalos que se sobrepõem indicam diferenças que podem ser ruído amostral.",
+  "resultado": "Acurácia: treino 0.9994, validação 0.9710, teste 0.9794 (14 erros em 681 imagens). Gap treino−validação 2.84 p.p. (variância baixa); validação−teste -0.84 p.p. (p = 0.26: compatível com ruído amostral). F1 macro no teste 0.9794, MCC 0.9726."
+ },
+ {
+  "arquivo": "07_matrizes_confusao.png",
+  "titulo": "Matrizes de confusão em validação e teste",
+  "mostra": "Quantas imagens de cada classe real foram previstas como cada classe (contagem e % da linha) em validação e teste.",
+  "ler": "A diagonal são os acertos; quanto mais escura a diagonal e mais clara a parte de fora, melhor. Cada célula fora da diagonal mostra qual classe é confundida com qual.",
+  "resultado": "Erros: 40 na validação e 14 no teste. Confusões mais frequentes no teste (real → previsto): meningioma→glioma (3); meningioma→notumor (3); glioma→meningioma (2); notumor→glioma (2). Pior recall por classe no teste: meningioma (0.960)."
+ },
+ {
+  "arquivo": "08_relatorio_classificacao.png",
+  "titulo": "Relatório de classificação por classe (precisão, recall e F1)",
+  "mostra": "Precisão, recall e F1 de cada classe no teste e na validação, com as médias macro (cada classe pesa igual) e ponderada pelo número de imagens (suporte).",
+  "ler": "A linha de cada classe mostra onde o modelo é mais fraco; a média macro dá voz à classe mais difícil e a ponderada se aproxima da acurácia. Verde mais escuro = melhor.",
+  "resultado": "No teste: F1 macro 0.9794; pior recall 0.960 (meningioma). Na visão tumor × sem tumor: sensibilidade 0.992, especificidade 0.987, precisão 0.996 e F2 0.993."
+ },
+ {
+  "arquivo": "09_roc_pr.png",
+  "titulo": "Curvas ROC e Precisão-Recall por classe",
+  "mostra": "ROC de cada classe (um-contra-todos) com a média macro, a mesma curva em zoom no canto de interesse e a curva Precisão-Recall de cada classe, em validação e teste.",
+  "ler": "Quanto mais a ROC colar no canto superior esquerdo, melhor (AUC 1,0 = separação perfeita); quanto mais a curva PR ficar no canto superior direito, melhor. Curvas das classes sobrepostas indicam desempenho uniforme.",
+  "resultado": "AUC macro: 0.9966 na validação e 0.9984 no teste; AP macro no teste 0.9959. Menor AUC por classe no teste: 0.9971 (meningioma). Ordenar bem (AUC) não garante decidir bem num corte nem ter probabilidade honesta: ver seções 6 a 8."
+ },
+ {
+  "arquivo": "10_log_loss.png",
+  "titulo": "Log-loss: a confiança do modelo é boa, não só o acerto?",
+  "mostra": "Log-loss em treino, validação e teste contra a base de prever sempre a prevalência, o log-loss por classe e a curva −log(p) com os erros reais do teste sobre ela.",
+  "ler": "Menor é melhor, e o valor deve ficar muito abaixo da base. Os pontos mais altos da curva são erros cometidos com alta confiança, que concentram o log-loss.",
+  "resultado": "Log-loss: treino 0.009, validação 0.122 e teste 0.078, contra 1.39 da base da prevalência. Os 5% de imagens de maior perda respondem por 93% do log-loss do teste: poucos erros confiantes dominam o valor. Brier no teste: 0.0324."
+ },
+ {
+  "arquivo": "11_calibracao.png",
+  "titulo": "Calibração e predição seletiva",
+  "mostra": "Esquerda: confiança declarada × acurácia observada em 6 faixas com o mesmo número de imagens. Centro: distribuição da confiança nos acertos e nos erros. Direita: acurácia obtida ao responder só às imagens mais confiantes, em função da cobertura.",
+  "ler": "Pontos sobre a diagonal = confiança honesta; abaixo = excesso de confiança. Erros com confiança menor que os acertos mostram que o modelo 'sabe quando duvida'. A curva alta à esquerda mostra que as previsões mais confiantes são mais confiáveis.",
+  "resultado": "ECE no teste 0.0050 (meta ≤ 0.03); confiança média 0.987 nos acertos e 0.778 nos erros. Faixa menos confiante: prometeu 0.902, aconteceu 0.877. A maior cobertura que mantém ≥ 99,5% de acurácia nas respondidas é 89%; o restante iria para revisão humana."
+ },
+ {
+  "arquivo": "12_visao_clinica.png",
+  "titulo": "Visão clínica: quantos tumores passam despercebidos?",
+  "mostra": "As três classes de tumor agrupadas contra 'notumor': ROC binária, sensibilidade e especificidade em cada limiar do score de tumor e os resultados no teste com o corte padrão 0,50 e com o corte escolhido na validação para sensibilidade ≥ 99,5%.",
+  "ler": "O erro mais grave é o falso negativo (tumor passando como normal). Subir o limiar troca sensibilidade por especificidade; o corte deve ser escolhido na validação e medido uma vez no teste.",
+  "resultado": "AUC binária no teste 0.9999. Com o corte 0,50: sensibilidade 0.992 (4 falsos negativos) e especificidade 0.987 (2 falsos positivos). Com o corte da validação (0.07): sensibilidade 0.998 (1 falso negativo) e especificidade 0.981 (3 falsos positivos)."
+ },
+ {
+  "arquivo": "13_incerteza.png",
+  "titulo": "Incerteza estatística: intervalos de confiança e estabilidade por dobras",
+  "mostra": "Distribuições bootstrap da acurácia, do F1 macro e do log-loss no teste com seus intervalos de 95%, e a distribuição da acurácia e da ROC-AUC em 50 dobras estratificadas do teste.",
+  "ler": "Intervalos largos indicam que o número depende de poucas imagens. A média ± desvio por dobras é o resultado honesto de uma validação (nunca um número solto). Mede a oscilação da amostra de teste, não a variância entre treinos.",
+  "resultado": "Acurácia no teste 0.9794 (IC 95% bootstrap [0.9692; 0.9897]; Wilson [0.9658; 0.9877]); F1 macro IC [0.9682; 0.9898]; log-loss IC [0.041; 0.122]. Em 50 dobras de ≈136 imagens: acurácia 0.9794 ± 0.0099 (mín. 0.956, máx. 1.000) e ROC-AUC 0.9984 ± 0.0014."
+ },
+ {
+  "arquivo": "14_robustez.png",
+  "titulo": "Robustez a perturbações sintéticas",
+  "mostra": "Acurácia do modelo quando imagens de teste recebem ruído gaussiano, desfoque, mudança de brilho e contraste, compressão JPEG, rotação, espelhamento ou oclusão, e a queda em relação à imagem original. Perturbações sintéticas indicam sensibilidade, não substituem validação em outro scanner ou hospital.",
+  "ler": "Barras longas na esquerda = mantém a acurácia; barras longas na direita = grande queda. Quanto menor a queda média, mais robusto.",
+  "resultado": "Queda média de 20.5 p.p. (acurácia original na amostra: 0.975). Pior caso: desfoque (raio 4) (−72 p.p.). Perturbações com queda > 10 p.p.: ruído gaussiano σ=10, ruído gaussiano σ=25, desfoque (raio 2), desfoque (raio 4), JPEG q=20. Praticamente sem efeito (≤ 2 p.p.): brilho −30%, brilho +30%, contraste −40%, flip horizontal, oclusão 25% da largura."
+ },
+ {
+  "arquivo": "15_gradcam_acertos.png",
+  "titulo": "Mapas de calor (Grad-CAM) de YOLO11s-cls: um acerto por classe",
+  "mostra": "Imagem de RM original e o mapa de calor do que mais influenciou a decisão do modelo, para um exemplo correto de cada classe (glioma, meningioma, notumor, pituitary). Vermelho/amarelo = região mais importante.",
+  "ler": "Esperamos calor sobre a lesão ou a anatomia relevante (por exemplo, a região da hipófise no caso pituitary), e não sobre bordas, fundo escuro ou artefatos. Em 'notumor' não há lesão: calor difuso é esperado. Leitura qualitativa, sem causalidade.",
+  "resultado": "Nos exemplos mostrados o modelo acerta as 4 imagens com confiança máxima. Em glioma e meningioma o calor se concentra sobre a lesão (no meningioma, num ponto menor que a massa), mas há pontos secundários soltos no fundo e na borda do crânio. Em notumor aparecem dois focos, um deles na borda lateral do crânio, fora de uma região de interesse. Em pituitary o calor é disperso, com pontos nas órbitas e na borda lateral (orelha) e pouca ênfase na região da sela. A atenção é mais fragmentada e menos específica da lesão. Interpretação feita pela inspeção visual destes exemplos."
+ },
+ {
+  "arquivo": "16_gradcam_erros.png",
+  "titulo": "Mapas de calor (Grad-CAM) de YOLO11s-cls: imagens que o modelo errou",
+  "mostra": "As 6 imagens de teste que o modelo errou com maior confiança, com o mapa de calor e a classe prevista (verde = certo, vermelho = errado).",
+  "ler": "Compare onde o modelo olhou quando errou: foco em região irrelevante, borda ou calor muito disperso sugere falha de atenção; foco na lesão com classe errada sugere imagem ambígua entre tipos de tumor.",
+  "resultado": "O modelo errou 14 imagens no teste; o painel mostra as 6 de maior confiança. Na maioria dos erros mais confiantes o calor está disperso ou fora da lesão: nos dois erros de pituitary para meningioma ele cobre órbitas, bordas e regiões periféricas, sem ênfase na sela; num meningioma cerebelar visível à esquerda classificado como notumor (falso negativo com confiança 0,99) o calor está no hemisfério oposto, longe da lesão. Nos demais, pontos isolados na linha média ou regiões anteriores e inferiores. Sugere falha de atenção mais do que ambiguidade entre tipos de tumor. Interpretação feita pela inspeção visual destes exemplos."
+ },
+ {
+  "arquivo": "17_galeria_erros.png",
+  "titulo": "Galeria dos erros no conjunto de teste",
+  "mostra": "As imagens de teste que o modelo classificou errado (até 12), da mais confiante para a menos confiante, com a classe real e a prevista.",
+  "ler": "Erros com confiança alta são os mais perigosos. Imagens ambíguas entre dois tipos de tumor tendem a se repetir nas mesmas confusões.",
+  "resultado": "14 erros no teste (14 de 681); 4 deles com confiança ≥ 0,90; confiança média nos erros 0.78. Confusão mais frequente: meningioma → glioma (3). 1 erro tem quase-duplicata no treino."
+ },
+ {
+  "arquivo": "18_checklist.png",
+  "titulo": "Checklist de aprovação",
+  "mostra": "Quatorze critérios (desempenho, generalização, calibração, integridade dos dados, atalhos, robustez e reprodutibilidade) com o valor medido, a meta e o status de cada um.",
+  "ler": "Permite concluir objetivamente se o modelo está aprovado segundo critérios definidos antes de olhar o resultado. As metas são do grupo (dicionário CRIT) e podem ser ajustadas.",
+  "resultado": "11 de 14 critérios OK, 1 com atenção e 2 com falha. Fora do OK: Duplicatas entre treino e teste (atenção); Atalhos de aquisição (atributos triviais) (falha); Robustez: queda média de acurácia (falha)."
+ }
+]

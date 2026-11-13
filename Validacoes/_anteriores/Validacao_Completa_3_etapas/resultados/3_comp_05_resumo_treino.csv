@@ -1,0 +1,12 @@
+,YOLO11s-cls,EfficientNet-B0
+Épocas,93,100
+Melhor época,63,40
+Menor loss de treino,0.0122,0.0023689084433783
+Loss de treino final,0.01374,0.0039462676699472
+Menor loss valid,0.11184,0.066425234313287
+Época da menor loss valid,60,24
+LR inicial,9.93377e-05,0.0003
+LR final,7.6654e-06,7.401594514025999e-08
+Tempo total (min),801.2333333333333,230.5368213891983
+Épocas c/ loss de treino subindo >30%,0,16
+Parou por early stopping,True,n/d (config do treino não gravada)

@@ -1,0 +1,15 @@
+﻿Critério,YOLO11s-cls,EfficientNet-B0,Vencedor
+Acurácia — teste,0.9794,0.9912,EfficientNet-B0
+Acurácia — teste limpo,0.9772,0.9895,EfficientNet-B0
+Acurácia — validação,0.971,0.9884,EfficientNet-B0
+F1 macro — teste,0.9794,0.9914,EfficientNet-B0
+MCC — teste,0.9726,0.9882,EfficientNet-B0
+AUC macro — teste,0.9987,0.9999,EfficientNet-B0
+Log-loss — teste,0.078,0.0339,EfficientNet-B0
+ECE — teste,0.005,0.0087,YOLO11s-cls
+"Sensibilidade p/ tumor (corte 0,50)",0.9924,1.0,EfficientNet-B0
+Gap treino−validação (p.p.),2.84,1.12,EfficientNet-B0
+Queda média sob perturbação (p.p.),20.5,22.3,YOLO11s-cls
+Parâmetros (M),5.45,4.01,EfficientNet-B0
+GFLOPs por imagem,7.71,4.01,EfficientNet-B0
+"Latência do modelo (ms, CPU)",76.7,136.3,YOLO11s-cls

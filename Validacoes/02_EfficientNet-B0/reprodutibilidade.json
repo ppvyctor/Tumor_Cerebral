@@ -1,0 +1,25 @@
+{
+ "ambiente": {
+  "python": "3.14.0",
+  "torch": "2.11.0+cpu",
+  "torchvision": "0.26.0+cpu",
+  "ultralytics": "8.4.194",
+  "scikit-learn": "1.8.0",
+  "numpy": "2.4.0",
+  "pandas": "2.3.3",
+  "sistema": "Windows-11-10.0.26100-SP0",
+  "dispositivo": "cpu"
+ },
+ "sha256_pesos": "5bd491856e8d1fbde961772b393b7c43e1e92ca30e6446d135d565671431cc94",
+ "manifesto_dataset": "24859d45c130ff831b85f33283d958c068deb77555e1f9657af7b7905a6e8b73",
+ "n_imagens": 6879,
+ "determinismo_dif_max": 0.0,
+ "dif_max_vs_cache": 0.0,
+ "img_size": 512,
+ "classes": [
+  "glioma",
+  "meningioma",
+  "notumor",
+  "pituitary"
+ ]
+}

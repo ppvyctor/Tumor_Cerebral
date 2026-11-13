@@ -1,0 +1,3 @@
+Conjunto,Ambos acertam,Só CNN acerta,Só YOLO acerta,Ambos erram,p McNemar (exato),"Significativo (p<0,05)",Kappa entre modelos,Acc ensemble,Log-loss ensemble
+validação,1337,26,2,14,3.032386302947998e-06,SIM,0.9699820379548266,0.9840464104423495,0.06984854118149726
+teste,664,11,3,3,0.057373046875,não,0.9706075306872918,0.9926578560939795,0.0368413003527794

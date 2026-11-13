@@ -1,0 +1,11 @@
+﻿index,YOLO11s-cls,EfficientNet-B0
+AUC binária,0.9998656898656899,0.9998778998779
+"Sensibilidade (corte 0,50)",0.9923809523809524,1.0
+"Especificidade (corte 0,50)",0.9871794871794872,0.9935897435897436
+"Falsos negativos (0,50)",4.0,0.0
+"Falsos positivos (0,50)",2.0,1.0
+"Corte da validação (sens ≥ 99,5%)",0.07257214428857717,0.6951953907815631
+Sensibilidade (corte da validação),0.9980952380952381,1.0
+Especificidade (corte da validação),0.9807692307692307,0.9935897435897436
+Falsos negativos (corte da validação),1.0,0.0
+Falsos positivos (corte da validação),3.0,1.0

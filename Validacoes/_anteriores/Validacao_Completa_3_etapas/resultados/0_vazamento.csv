@@ -1,0 +1,4 @@
+Comparação,Hash de arquivo idêntico,"Quase-idênticas (dif. ≤ 0,5)",Quase-duplicatas (dif. ≤ 2.0),% de teste,Rótulo igual ao do par?,% de validação
+teste × treino,0,77,101,14.831130690161526,1.0,
+validação × treino,0,155,199,,0.9949748743718593,14.430746918056563
+teste × validação,0,27,41,6.020558002936858,1.0,

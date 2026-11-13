@@ -1,0 +1,12 @@
+Critério,Valor,Meta,Status
+Acurácia no teste,0.9794419970631424,≥ 0.97,✅
+Acurácia no teste LIMPO (sem quase-duplicatas),0.9771929824561404,≥ 0.97,✅
+Menor recall entre as classes (teste),0.9602272727272727,≥ 0.95,✅
+Sensibilidade p/ tumor (teste),0.9923809523809524,≥ 0.99,✅
+AUC macro (teste),0.9983708886957086,≥ 0.99,✅
+Log-loss (teste),0.07800486818772018,≤ 0.15,✅
+ECE — calibração (teste),0.0049914936049569435,≤ 0.03,✅
+Gap treino − valid (variância),0.028383990672647075,≤ 0.03,✅
+|Gap valid − teste|,0.008448523531597751,≤ 0.02,✅
+Queda média de acurácia sob perturbação,0.2045454545454545,≤ 0.1,❌
+Determinismo (dif. máx. de probabilidade),0.0,≤ 1e-5,✅

@@ -1,0 +1,5 @@
+﻿index,YOLO11s-cls,EfficientNet-B0
+glioma,0.99744,0.99993
+meningioma,0.99709,0.99988
+notumor,0.99987,0.99988
+pituitary,0.99909,0.99983

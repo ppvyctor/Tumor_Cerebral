@@ -1,0 +1,7 @@
+Arquivo,Real,Previsto,Confiança,Quase-duplicata no treino?
+Te-gl_62_jpg.rf.e5510a0f35d1fd15d06d9a14cacfa330.jpg,glioma,meningioma,0.9877122,False
+Tr-aug-me_61_jpg.rf.382cf75f039a56fb94cc6df82e713949.jpg,meningioma,pituitary,0.8512373,False
+Tr-me_14_jpg.rf.a95e862ba6e125e89d602ae6f1247939.jpg,meningioma,glioma,0.8441179,False
+Tr-me_964_jpg.rf.6d728af1f74ceef073eb6acf88f7cbd7.jpg,meningioma,pituitary,0.89551365,False
+Tr-no_907_jpg.rf.c9992476b360bb8a91dc09eceaa89c12.jpg,notumor,pituitary,0.99924207,False
+Tr-pi_1255_jpg.rf.4a24eef12abfbc89962f61594be47a40.jpg,pituitary,meningioma,0.8830973,False

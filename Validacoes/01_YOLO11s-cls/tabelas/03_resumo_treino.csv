@@ -1,0 +1,11 @@
+﻿index,valor
+Épocas executadas,93.0
+Melhor época,63.0
+Acurácia de validação na melhor época,0.97099
+Início do platô (época),49.0
+Otimismo da seleção (p.p.),0.3128723404255518
+Menor loss de validação,0.11184
+Loss de treino final,0.01374
+LR inicial,9.93377e-05
+LR final,7.6654e-06
+Tempo de treino (min),801.2333333333333

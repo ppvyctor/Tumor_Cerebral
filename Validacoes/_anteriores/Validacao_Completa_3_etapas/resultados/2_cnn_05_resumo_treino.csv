@@ -1,0 +1,12 @@
+,EfficientNet-B0
+Épocas,100
+Melhor época,40
+Menor loss de treino,0.0023689084433783
+Loss de treino final,0.0039462676699472
+Menor loss valid,0.066425234313287
+Época da menor loss valid,24
+LR inicial,0.0003
+LR final,7.401594514025999e-08
+Tempo total (min),230.5368213891983
+Épocas c/ loss de treino subindo >30%,16
+Parou por early stopping,n/d (config do treino não gravada)

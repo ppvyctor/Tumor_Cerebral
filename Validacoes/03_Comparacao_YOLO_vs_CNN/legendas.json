@@ -1,0 +1,121 @@
+[
+ {
+  "arquivo": "01_metricas_lado_a_lado.png",
+  "titulo": "Métricas lado a lado: acurácia, F1, MCC e AUC",
+  "mostra": "Acurácia, F1 macro, MCC e AUC macro de cada modelo em validação e teste, nas mesmas imagens.",
+  "ler": "Barras mais altas são melhores. O eixo vertical é ampliado para mostrar diferenças pequenas, que devem ser lidas junto com os intervalos de confiança da figura 10.",
+  "resultado": "No teste (681 imagens): EfficientNet-B0 acerta 99,1% (6 erros) e YOLO11s-cls 97,9% (14 erros). Na validação: 98,8% e 97,1%. F1 macro no teste: 0.9914 (CNN) e 0.9794 (YOLO); MCC: 0.9882 e 0.9726."
+ },
+ {
+  "arquivo": "02_roc_pr_sobrepostas.png",
+  "titulo": "Curvas ROC e Precisão-Recall dos dois modelos",
+  "mostra": "ROC macro e Precisão-Recall macro (média das 4 classes um-contra-todos) dos dois modelos no teste, em zoom, e a AUC por classe.",
+  "ler": "Quanto mais a ROC colar no canto superior esquerdo (e a PR no superior direito), melhor a separação das classes. Ordenar bem (AUC) é diferente de decidir bem num corte e de ter probabilidade honesta (figuras 3 e 8).",
+  "resultado": "AUC macro no teste: EfficientNet-B0 0.9999 e YOLO11s-cls 0.9987; AP macro 0.9996 e 0.9959. Menor AUC por classe: EfficientNet-B0 0.9998 (pituitary) e YOLO11s-cls 0.9971 (meningioma)."
+ },
+ {
+  "arquivo": "03_log_loss_comparado.png",
+  "titulo": "Log-loss: qual modelo tem probabilidades melhores?",
+  "mostra": "Log-loss de cada modelo em treino, validação e teste contra a base de prever a prevalência, o log-loss por classe e os erros do teste sobre a curva −log(p).",
+  "ler": "Menor é melhor. Errar com certeza (probabilidade baixa na classe certa) custa muito mais do que errar com dúvida; os pontos mais altos da curva são erros confiantes.",
+  "resultado": "Log-loss no teste: EfficientNet-B0 0.034 e YOLO11s-cls 0.078, contra 1.39 da base. Os 5% de imagens de maior perda respondem por 100% (CNN) e 92% (YOLO) do log-loss do teste."
+ },
+ {
+  "arquivo": "04_acuracia_treino_val_teste.png",
+  "titulo": "Acurácia em treino, validação e teste: qual modelo generaliza melhor?",
+  "mostra": "Acurácia de cada modelo nos três conjuntos com intervalo de confiança, o gap treino−validação e validação−teste em pontos percentuais e a acurácia no teste completo contra o teste limpo (sem quase-duplicatas do treino).",
+  "ler": "Treino muito acima da validação indica sobreajuste. Validação próxima do teste indica estimativa estável. Se a acurácia no teste limpo for próxima à do completo, o vazamento por quase-duplicatas favoreceu pouco.",
+  "resultado": "Gap treino−validação: EfficientNet-B0 1.12 p.p. e YOLO11s-cls 2.84 p.p. (ambos abaixo da meta de 3 p.p.); validação−teste: -0.28 e -0.84 p.p. 101 imagens de teste (14.8%) têm quase-duplicata no treino; no teste limpo (570 imagens) a acurácia é 0.990 (CNN) e 0.977 (YOLO), contra 0.991 e 0.979 no teste completo."
+ },
+ {
+  "arquivo": "05_acuracia_por_epoca.png",
+  "titulo": "Acurácia de treino e de validação por época nos dois modelos",
+  "mostra": "Acurácia de validação de cada modelo a cada época, a acurácia de treino por época da CNN (registrada no treino, com augmentation) e a acurácia de treino do melhor checkpoint do YOLO (medida depois, sem augmentation), com o gap da CNN por época.",
+  "ler": "Curvas de treino e validação próximas e estáveis indicam boa generalização. O gap de acurácia por época só existe para a CNN, pois o treino do YOLO não gravou a acurácia de treino por época.",
+  "resultado": "YOLO: 93 épocas, melhor na 63ª (validação 0.971). CNN: 100 épocas, melhor na 40ª (validação 0.988); gap médio de acurácia nas últimas 10 épocas 1.18 p.p. A CNN atinge a faixa de 0,98 de validação em poucas épocas e o YOLO converge mais devagar, estabilizando em torno de 0,97."
+ },
+ {
+  "arquivo": "06_treinamento_loss_lr.png",
+  "titulo": "Loss e taxa de aprendizado dos dois treinos",
+  "mostra": "Loss de treino (linha cheia) e de validação (tracejada) de cada modelo, a taxa de aprendizado por época (YOLO: gravada; CNN: reconstruída pela fórmula do cosine) e a razão entre a loss de validação e a de treino.",
+  "ler": "As escalas das losses diferem entre os frameworks (compare o formato, não o valor). Razão perto de 1 e estável indica pouco sobreajuste; razão crescente indica a validação se afastando do treino.",
+  "resultado": "Os dois usam AdamW com taxa inicial de 3e-4 e decaimento cosseno; o YOLO tem warm-up nas 3 primeiras épocas. Tempo de treino: YOLO 13.4 h (CPU) e CNN 230 min (hardware não registrado, portanto os tempos não são comparáveis). Início do platô de validação: época 49 (YOLO) e 34 (CNN)."
+ },
+ {
+  "arquivo": "07_confusao_e_por_classe.png",
+  "titulo": "Matrizes de confusão e recall por classe",
+  "mostra": "Matriz de confusão de cada modelo no teste (contagem e % da linha) e o recall de cada classe.",
+  "ler": "A diagonal são os acertos; células fora da diagonal mostram qual classe é confundida com qual. Recall baixo em uma classe indica onde o modelo é mais fraco.",
+  "resultado": "Confusões mais frequentes (real → previsto): YOLO11s-cls: meningioma→glioma (3); meningioma→notumor (3); glioma→meningioma (2). EfficientNet-B0: meningioma→pituitary (2); glioma→meningioma (1); meningioma→glioma (1). Pior recall: YOLO11s-cls 0.960 (meningioma) e EfficientNet-B0 0.983 (meningioma)."
+ },
+ {
+  "arquivo": "08_calibracao_e_selecao.png",
+  "titulo": "Calibração e predição seletiva dos dois modelos",
+  "mostra": "Confiança declarada × acurácia observada (6 faixas com o mesmo número de imagens), acurácia ao responder só as imagens mais confiantes e a confiança nos erros de cada modelo.",
+  "ler": "Pontos sobre a diagonal indicam confiança honesta. Erros com confiança baixa mostram que o modelo 'sabe quando duvida'; a curva alta à esquerda mostra que as previsões mais confiantes são mais confiáveis.",
+  "resultado": "ECE no teste: YOLO11s-cls 0.0050 e EfficientNet-B0 0.0087 (ambos bem abaixo de 0,03). Confiança média nos erros: 0.78 (YOLO) e 0.91 (CNN). A cobertura que mantém ≥ 99,5% de acurácia é 89% no YOLO e 99% na CNN."
+ },
+ {
+  "arquivo": "09_visao_clinica.png",
+  "titulo": "Visão clínica: qual modelo deixa passar menos tumores?",
+  "mostra": "Glioma, meningioma e pituitary agrupados contra 'notumor': ROC binária, sensibilidade e especificidade com o corte padrão 0,50 e a contagem de falsos negativos e positivos de cada modelo no teste.",
+  "ler": "O erro mais grave é o falso negativo (tumor classificado como normal). Sensibilidade perto de 100% e poucos falsos negativos são desejáveis.",
+  "resultado": "Com o corte 0,50 no teste: EfficientNet-B0 sensibilidade 1.000 (0 falsos negativos), especificidade 0.994; YOLO11s-cls sensibilidade 0.992 (4 falsos negativos), especificidade 0.987. Escolhendo na validação o corte para sensibilidade ≥ 99,5% (0.70 na CNN e 0.07 no YOLO), a sensibilidade no teste é 1.000 e 0.998."
+ },
+ {
+  "arquivo": "10_estatistica_pareada.png",
+  "titulo": "A diferença entre os modelos é real? Bootstrap pareado, McNemar e dobras",
+  "mostra": "Esquerda: acurácia no teste com intervalo de confiança (e a do ensemble). Centro: distribuição bootstrap da diferença CNN − YOLO e o p do McNemar. Direita: acurácia em 50 dobras estratificadas do teste, com a faixa de empate do líder (melhor − 1 desvio).",
+  "ler": "Intervalos que se sobrepõem podem ser ruído. Se o IC da diferença exclui zero e p < 0,05, a diferença é significativa. Se o segundo colocado está dentro da faixa de empate do primeiro, é empate técnico. As dobras medem a oscilação da amostra de teste, não a variância entre treinos, e não são independentes.",
+  "resultado": "Diferença CNN − YOLO = +1.17 p.p. (IC 95% [+0.15; +2.35]); McNemar no teste p = 0.057 (11 imagens só a CNN acerta × 3 só o YOLO) → limítrofe: o IC do bootstrap exclui zero por pouco, mas o McNemar não é significativo a 5%. Na validação (1379 imagens): 26 × 2, p = 3e-06. Em 50 dobras: EfficientNet-B0 0.9912 ± 0.0065 e YOLO11s-cls 0.9794 ± 0.0099; YOLO11s-cls fica fora da faixa de empate de EfficientNet-B0. Kappa entre os modelos 0.971; ensemble 99,3%."
+ },
+ {
+  "arquivo": "11_robustez_comparada.png",
+  "titulo": "Robustez a perturbações sintéticas nos dois modelos",
+  "mostra": "Acurácia dos dois modelos, nas mesmas imagens e com as mesmas perturbações (ruído gaussiano, desfoque, brilho, contraste, JPEG, rotação, espelhamento, oclusão), e a queda em relação à imagem original. Resultados calculados nos notebooks de cada modelo.",
+  "ler": "Verde mantém a acurácia, vermelho falha. Quanto menor a queda, mais robusto. Perturbações sintéticas indicam sensibilidade e não substituem validação em outro scanner ou hospital.",
+  "resultado": "Queda média: YOLO11s-cls 20.5 p.p. e EfficientNet-B0 22.3 p.p. (os dois acima do limite de 10 p.p.). Pior caso: YOLO11s-cls desfoque (raio 4) (−72 p.p.); EfficientNet-B0 ruído gaussiano σ=25 (−78 p.p.). A compressão JPEG q=20 afeta o YOLO (−39 p.p.) mas pouco a CNN (−0 p.p.); ruído e desfoque forte derrubam os dois. Brilho, contraste, espelhamento e oclusão não alteram os resultados."
+ },
+ {
+  "arquivo": "12_gradcam_acertos.png",
+  "titulo": "Mapas de calor (Grad-CAM) em acertos — uma imagem por classe",
+  "mostra": "Imagem de RM original e, ao lado, o mapa de calor do que mais influenciou a decisão da CNN e do YOLO, para um exemplo correto de cada classe. Vermelho/amarelo = região mais importante.",
+  "ler": "Esperamos que o calor se concentre na região anatômica relevante (lesão ou área da hipófise), e não em bordas, fundo escuro ou artefatos. É uma leitura qualitativa: não prova causalidade.",
+  "resultado": "Nos exemplos mostrados, a EfficientNet-B0 concentra o calor na lesão visível (glioma e meningioma) e na região central da base do crânio no caso pituitary; em 'notumor', onde não há lesão, o calor se espalha por várias regiões. O YOLO tem foco mais fragmentado, com pontos quentes também em bordas e regiões periféricas (ex.: pituitary), de interpretação menos clara. Os dois modelos acertam as 4 imagens. (Interpretação feita pela inspeção visual desta execução; releia se trocar as imagens.)"
+ },
+ {
+  "arquivo": "13_gradcam_erros.png",
+  "titulo": "Mapas de calor (Grad-CAM) em imagens erradas",
+  "mostra": "Imagens de teste em que pelo menos um modelo errou (primeiro as que os dois erram), com o mapa de calor de cada modelo e a classe prevista (verde = certo, vermelho = errado).",
+  "ler": "Compare onde cada rede olhou quando errou: foco em região irrelevante ou difusa sugere falha de atenção; foco na lesão com classe errada sugere imagem ambígua entre tipos de tumor.",
+  "resultado": "No teste, 3 imagens foram erradas pelos dois modelos e 14 por apenas um (erros complementares). Linha 1 (glioma): a CNN olha para a massa brilhante mas a chama de meningioma (confusão entre tipos de tumor), enquanto o YOLO dispersa a atenção fora da massa e prevê 'notumor' — um falso negativo. Linhas 2 e 3: ambos erram; na linha 2 a CNN foca a região central da base do crânio, perto da hipófise (hipótese de confusão por proximidade anatômica, não validada com especialista). Linhas 4 e 5: a CNN acerta com foco na lesão e o YOLO erra com atenção dispersa. (Interpretação feita pela inspeção visual desta execução; o painel mostra 5 imagens.)"
+ },
+ {
+  "arquivo": "14_erros_quem_erra_onde.png",
+  "titulo": "Quem erra onde: sobreposição dos erros dos dois modelos",
+  "mostra": "Quantas imagens de teste só um dos modelos erra e quantas os dois erram, e as 8 primeiras imagens da lista (primeiro as que os dois erram), com a classe prevista e a confiança de cada modelo.",
+  "ler": "Erros que não coincidem mostram que os modelos são complementares (um ensemble pode corrigir parte deles). Imagens que os dois erram são as mais difíceis ou ambíguas; títulos em vermelho indicam erro dos dois.",
+  "resultado": "17 imagens de teste têm erro de pelo menos um modelo: 3 dos dois, 3 só da CNN e 11 só do YOLO. A baixa coincidência (3 em comum) mostra erros em grande parte complementares; o ensemble por média das probabilidades alcança 99,3% no teste."
+ },
+ {
+  "arquivo": "15_eficiencia.png",
+  "titulo": "Eficiência: tamanho, custo e velocidade dos dois modelos",
+  "mostra": "Número de parâmetros, custo de cálculo por imagem (GFLOPs), latência de inferência do modelo na CPU e tamanho do arquivo de pesos, medidos pelo notebook de cada modelo na mesma máquina.",
+  "ler": "Menos parâmetros e GFLOPs indicam modelo mais leve, mas a latência real depende também de como a arquitetura usa a memória do hardware. Os pesos do YOLO são salvos em FP16 e os da CNN em FP32, então o tamanho em disco não é comparável diretamente.",
+  "resultado": "A CNN é menor (4.0 M de parâmetros e 4.0 GFLOPs, contra 5.5 M e 7.7), porém mais lenta na CPU (latência mediana 136 ms contra 77 ms). Medido em CPU; varia com o hardware."
+ },
+ {
+  "arquivo": "16_checklist_lado_a_lado.png",
+  "titulo": "Checklist de aprovação dos dois modelos",
+  "mostra": "Os 14 critérios de aprovação (desempenho, generalização, calibração, integridade dos dados, atalhos, robustez, reprodutibilidade) com o status de cada modelo e o valor medido.",
+  "ler": "OK atende; ATENÇÃO vale registrar; FALHA deve ser investigada. Os critérios e metas são os mesmos dos notebooks de cada modelo (metas do grupo, não padrões clínicos).",
+  "resultado": "EfficientNet-B0: 11 OK, 1 atenção, 2 falhas. YOLO11s-cls: 11 OK, 1 atenção, 2 falhas. Os dois falham nos mesmos critérios (atalhos de aquisição e robustez) e têm a mesma atenção (duplicatas). Critérios com status diferente: nenhum."
+ },
+ {
+  "arquivo": "17_placar_final.png",
+  "titulo": "Placar final: critério a critério",
+  "mostra": "Os principais critérios de qualidade, generalização, robustez e custo, com o valor de cada modelo e quem vence cada um.",
+  "ler": "Verde (CNN), laranja (YOLO), cinza (empate técnico). O placar é um resumo: cada critério tem peso diferente conforme o uso (por exemplo, latência para uso em tempo real, sensibilidade para triagem).",
+  "resultado": "A EfficientNet-B0 vence 11 critérios, o YOLO11s-cls vence 3 e 0 empatam. O YOLO11s-cls vence: ECE — teste, Queda média sob perturbação (p.p.), Latência do modelo (ms, CPU). A EfficientNet-B0 vence: Acurácia — teste, Acurácia — teste limpo, Acurácia — validação, F1 macro — teste, MCC — teste, AUC macro — teste, Log-loss — teste, Sensibilidade p/ tumor (corte 0,50), Gap treino−validação (p.p.), Parâmetros (M), GFLOPs por imagem."
+ }
+]

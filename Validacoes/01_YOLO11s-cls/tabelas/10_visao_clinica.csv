@@ -1,0 +1,5 @@
+﻿Corte,Conjunto,Sensibilidade,Especificidade,Falsos negativos,Falsos positivos
+"corte 0,50",validação,0.9923371647509579,0.991044776119403,8,3
+"corte 0,50",teste,0.9923809523809524,0.9871794871794872,4,2
+corte da validação (0.07),validação,0.9952107279693486,0.9641791044776119,5,12
+corte da validação (0.07),teste,0.9980952380952381,0.9807692307692307,1,3

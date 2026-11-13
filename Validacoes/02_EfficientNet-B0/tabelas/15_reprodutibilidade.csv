@@ -1,0 +1,16 @@
+﻿index,valor
+python,3.14.0
+torch,2.11.0+cpu
+torchvision,0.26.0+cpu
+ultralytics,8.4.194
+scikit-learn,1.8.0
+numpy,2.4.0
+pandas,2.3.3
+sistema,Windows-11-10.0.26100-SP0
+dispositivo,cpu
+SHA-256 dos pesos,5bd491856e8d1fbde961772b393b7c43e1e92ca30e6446d135d565671431cc94
+SHA-256 do dataset (manifesto),24859d45c130ff831b85f33283d958c068deb77555e1f9657af7b7905a6e8b73
+Semente de treino,42
+Semente da avaliação,42
+Dif. máx. entre 2 execuções,0.0
+Dif. máx. vs. cache,0.0

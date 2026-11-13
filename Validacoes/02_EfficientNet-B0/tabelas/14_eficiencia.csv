@@ -1,0 +1,7 @@
+﻿index,valor
+Parâmetros (milhões),4.012672
+GFLOPs por imagem (512×512),4.012706816
+Arquivo de pesos (MB),16.353861
+Latência mediana do modelo (ms),136.33389999995416
+Latência p95 (ms),147.9103950008721
+Dispositivo,cpu

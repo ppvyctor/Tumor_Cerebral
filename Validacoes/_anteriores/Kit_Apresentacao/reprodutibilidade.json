@@ -1,0 +1,37 @@
+{
+ "ambiente": {
+  "python": "3.14.0",
+  "torch": "2.11.0+cpu",
+  "torchvision": "0.26.0+cpu",
+  "ultralytics": "8.4.194",
+  "scikit-learn": "1.8.0",
+  "numpy": "2.4.0",
+  "pandas": "2.3.3",
+  "so": "Windows-11-10.0.26100-SP0",
+  "dispositivo": "cpu"
+ },
+ "sha256_pesos": {
+  "YOLO11s-cls": "1adb24e68c3bfb93e9b9fe49d5be8fd1c796da570db94eea238bf1c3c804b064",
+  "EfficientNet-B0": "5bd491856e8d1fbde961772b393b7c43e1e92ca30e6446d135d565671431cc94"
+ },
+ "manifesto_dataset_sha256": "24859d45c130ff831b85f33283d958c068deb77555e1f9657af7b7905a6e8b73",
+ "n_imagens": 6879,
+ "semente_yolo": 42,
+ "semente_cnn": 42,
+ "seed_avaliacao": 42,
+ "determinismo_dif_max": {
+  "YOLO11s-cls": 0.0,
+  "EfficientNet-B0": 0.0
+ },
+ "dif_max_vs_cache": {
+  "YOLO11s-cls": 2.2351741790771484e-08,
+  "EfficientNet-B0": 0.0
+ },
+ "img_size": 512,
+ "classes": [
+  "glioma",
+  "meningioma",
+  "notumor",
+  "pituitary"
+ ]
+}

@@ -1,0 +1,93 @@
+[
+ {
+  "arquivo": "01_papeis_estratificacao.png",
+  "titulo": "Papéis dos conjuntos e conferência da estratificação",
+  "mostra": "À esquerda, o tamanho e o papel de cada conjunto (Aula 01: treino aprende, validação escolhe, teste julga). À direita, a proporção de cada classe dentro de cada conjunto; a linha pontilhada é o que se teria com classes perfeitamente iguais.",
+  "ler": "Barras de uma mesma classe com alturas parecidas nos três conjuntos indicam divisão estratificada (Aula 05: 'confira que as proporções bateram'). As classes próximas de 25% indicam conjunto balanceado, caso em que a acurácia não é enganosa como no exemplo do dummy (Aula 02).",
+  "resultado": "Divisão 70/20/10. A maior diferença de proporção entre conjuntos é 1.5 p.p. (teste χ²: p = 0.42; sem evidência de que as proporções difiram entre os conjuntos). Razão entre a maior e a menor classe no treino: 1.08."
+ },
+ {
+  "arquivo": "02_curva_por_epoca.png",
+  "titulo": "Curva de validação por época: platô, faixa de empate e otimismo da seleção",
+  "mostra": "Acurácia de validação a cada época (e de treino, no caso da CNN, que registrou essa métrica), a faixa de empate (melhor − 1 desvio da fase final), a melhor época escolhida e, como linha tracejada, a acurácia no teste, que não participou da escolha.",
+  "ler": "Aula 10: o pico não decide sozinho; dentro da faixa de empate vale o ponto mais cedo/simples (menor gap e menos risco de sorte). A distância entre o melhor valor da validação e a média da fase final mede o otimismo da escolha (Aula 09: 'o best_score_ é otimista'); o teste é a referência honesta.",
+  "resultado": "YOLO: melhor época 63 (validação 0.971); a curva entra na faixa de empate na época 49 e fica em platô; otimismo da seleção ≈ 0.31 p.p.; teste 0.979. CNN: melhor época 40 (validação 0.988); platô a partir da época 34; otimismo ≈ 0.35 p.p.; teste 0.991. O teste ficou próximo ou acima do melhor valor da validação, sem sinal de seleção inflando o resultado, e treino e validação sem divergência crescente (sem sobreajuste acentuado)."
+ },
+ {
+  "arquivo": "03_comparacao_com_baselines.png",
+  "titulo": "Os modelos contra o classificador burro, a prevalência e um modelo de atalhos",
+  "mostra": "Acurácia e F1 macro no teste, e log-loss no teste, para quatro referências simples (dummy que chuta a classe mais comum, prevalência das classes, e dois modelos que só enxergam atributos triviais da imagem) contra o YOLO e a CNN.",
+  "ler": "Aula 02: a acurácia só impressiona se superar o dummy; o F1 macro revela o que a acurácia dilui. Aula 03: o log-loss tem de ficar bem abaixo da base da prevalência. Se um modelo de atalhos chegasse perto dos modelos treinados, desconfiaríamos de vazamento (Aula 14).",
+  "resultado": "Dummy: acurácia 0.25 e F1 0.10 (com 4 classes quase iguais, o piso é ~25%, e não 85% como no exemplo da aula). Log-loss da prevalência: 1.39. Atributos triviais (GradBoost): acurácia 0.93. YOLO: 0.979 / log-loss 0.078; CNN: 0.991 / 0.034."
+ },
+ {
+  "arquivo": "04_auditoria_de_atalhos.png",
+  "titulo": "Auditoria de atalhos: o que atributos triviais da imagem conseguem prever",
+  "mostra": "Matriz de confusão (teste) de um classificador que só enxerga 18 atributos triviais da imagem (brilho, contraste, fração de fundo preto, tamanho do crânio, bordas, cantos) e os atributos mais importantes para ele (importância por permutação na validação).",
+  "ler": "Se atributos que nada dizem sobre tumor preveem bem a classe, a origem/aquisição das imagens está correlacionada com o rótulo e os modelos profundos podem estar usando esse atalho (Aula 14: 'bom demais', 'correlação quase perfeita'). Acurácia perto de 25% (acaso) indica ausência de atalho simples.",
+  "resultado": "Acurácia do modelo de atalhos: 0.93 no teste (0.92 no teste limpo; 0.91 na validação), contra 0.25 do acaso (≈3.7×) e 0.99/0.98 dos modelos profundos. Atributos mais úteis: desvio, borda superior, borda inferior. Leitura: alerta: há sinais fortes de atalhos de aquisição. Isso não prova que os modelos profundos usem esses atalhos, mas mostra que cerca de 93% da tarefa pode ser resolvida sem olhar a lesão: o ganho dos modelos profundos sobre esse atalho é de apenas ≈6 p.p. (CNN) e ≈5 p.p. (YOLO). A acurácia de 98–99% deve ser lida com essa ressalva; validar em imagens de outra origem é o próximo passo."
+ },
+ {
+  "arquivo": "05_relatorio_de_classificacao.png",
+  "titulo": "Relatório de classificação por classe (precisão, recall e F1)",
+  "mostra": "O equivalente ao classification_report da Aula 02 para cada modelo no teste: precisão, recall e F1 de cada classe, a média macro (cada classe pesa igual) e a ponderada pelo suporte. Abaixo da linha escura, as médias.",
+  "ler": "A linha de cada classe mostra onde o modelo é mais fraco; a média macro dá voz à classe mais difícil e a ponderada se aproxima da acurácia. Verde mais escuro = melhor.",
+  "resultado": "Pior recall por classe: YOLO 0.960 (meningioma), CNN 0.983 (meningioma). Na visão tumor × sem tumor: F2 de 0.993 (YOLO) e 1.000 (CNN); especificidade 0.987 e 0.994; sensibilidade 0.992 e 1.000."
+ },
+ {
+  "arquivo": "06_roc_e_precisao_recall.png",
+  "titulo": "ROC e Precisão-Recall: qualidade da ordenação, sem depender de corte",
+  "mostra": "Curva ROC macro e curva Precisão-Recall macro (média das 4 classes um-contra-todos) no teste, em zoom no canto de interesse, e a AUC e a AP macro em validação e teste.",
+  "ler": "ROC: quanto mais colada ao canto superior esquerdo, melhor; AUC 0,5 = acaso, 1,0 = ordenação perfeita (Aula 03). PR: quanto mais ao canto superior direito, melhor. Como as classes são equilibradas, ROC e PR contam a mesma história (a PR só diverge da ROC quando o 'sim' é raro).",
+  "resultado": "AUC macro no teste: YOLO 0.9987 e CNN 0.9999; AP macro: 0.9959 e 0.9996. Ordenar bem não é o mesmo que decidir bem no corte nem ter probabilidade honesta: são perguntas separadas (figuras 7, 9 e 10)."
+ },
+ {
+  "arquivo": "07_log_loss.png",
+  "titulo": "Log-loss: a probabilidade é confiável, não só o acerto?",
+  "mostra": "Log-loss de cada modelo em treino, validação e teste contra a base de comparação (sempre prever a prevalência das classes); a curva −log(p) com os erros reais do teste sobre ela; e a distribuição da perda por imagem.",
+  "ler": "Menor é melhor, e o valor precisa ficar muito abaixo da base. Errar com certeza (probabilidade baixa na classe certa) custa muito mais do que errar com dúvida: os pontos mais altos da curva são os erros confiantes (Aula 03).",
+  "resultado": "Log-loss no teste: YOLO 0.078 e CNN 0.034, contra 1.39 da base da prevalência. Os 5% de imagens de maior perda respondem por 93% (YOLO) e 100% (CNN) do log-loss total: poucos erros confiantes dominam o valor."
+ },
+ {
+  "arquivo": "08_estabilidade_por_dobras.png",
+  "titulo": "Estabilidade por dobras estratificadas repetidas e faixa de empate entre os modelos",
+  "mostra": "Distribuição da acurácia e da ROC-AUC em 50 dobras do conjunto de teste (5 dobras estratificadas × 10 repetições, as mesmas imagens para os dois modelos), com a média ± desvio, a faixa de empate (melhor − 1 desvio) e a diferença pareada por dobra.",
+  "ler": "Aula 06: o resultado honesto é média ± desvio, nunca um número solto. Aula 12: comparação justa é pareada, nas mesmas dobras; se o segundo colocado está dentro da faixa do primeiro, é empate técnico e fica o mais simples. Atenção: mede a oscilação da amostra de teste, não a do treino (não retreinamos).",
+  "resultado": "Acurácia por dobra (≈136 imagens cada): YOLO 0.9794 ± 0.0099 e CNN 0.9912 ± 0.0065; ROC-AUC 0.9984 ± 0.0014 e 0.9999 ± 0.0001. Na comparação pareada, a CNN vence em 74% das dobras, empata em 20% e perde em 6%. Leitura: YOLO11s-cls fica fora da faixa de empate de EfficientNet-B0 (média − 1 desvio = 0.9847): a diferença supera a oscilação entre dobras."
+ },
+ {
+  "arquivo": "09_limiar_custo_e_auditoria.png",
+  "titulo": "Escolha do limiar pelo custo do erro (na validação) e auditoria no teste",
+  "mostra": "Custo por imagem (1 falso negativo = 5 falsos positivos) em função do limiar do score de tumor, calculado na validação; recall e precisão pelo limiar com a meta de recall; e o custo medido no teste com o corte padrão 0,50, o de custo mínimo e o da meta de recall.",
+  "ler": "Aula 12: o 0,50 não é ótimo de nada; o corte vem do custo ou da meta, escolhido na validação, e o teste só audita, uma vez. Com modelos muito precisos, a curva de custo tem um platô largo: não se persegue o mínimo exato, e o centro do platô é uma escolha robusta.",
+  "resultado": "YOLO11s-cls: corte de custo mínimo 0.02 (faixa 0.02–0.02); no teste, custo 0.013 com esse corte contra 0.032 no default 0,50 (falsos negativos 1 contra 4; falsos positivos 4 contra 2); previsto na validação 0.015. EfficientNet-B0: corte de custo mínimo 0.02 (faixa 0.01–0.02); no teste, custo 0.001 com esse corte contra 0.001 no default 0,50 (falsos negativos 0 contra 0; falsos positivos 1 contra 1); previsto na validação 0.009. No corte da meta de recall (maior limiar que cumpre recall ≥ 0.99 na validação) a sensibilidade no teste foi 0.990 (YOLO, corte 0.79) e 1.000 (CNN, corte 0.99): a meta é uma restrição justa na validação, mas sem folga para a oscilação do teste. Como os modelos erram pouco, o ganho sobre o 0,50 é pequeno na CNN e maior no YOLO; o que importa é o procedimento (escolher na validação, auditar no teste)."
+ },
+ {
+  "arquivo": "10_calibracao.png",
+  "titulo": "Calibração: o modelo cumpre o que promete?",
+  "mostra": "Reliability diagram (confiança prometida × acurácia observada em 5 faixas com o mesmo número de imagens), a tabela 'prometeu → aconteceu' de cada faixa e o efeito de uma correção por temperatura ajustada na validação e medida no teste.",
+  "ler": "Aula 12: pontos sobre a diagonal = número honesto; abaixo = confiança em excesso. A acurácia não muda ao calibrar (a ordem das classes é a mesma), muda o significado do número. Calibrar só vale quando a probabilidade entra numa conta (custo, corte, score lido por alguém); calibrar no treino seria vazamento.",
+  "resultado": "YOLO11s-cls: T = 1.41 (suaviza as probabilidades); no teste, ECE 0.0050 → 0.0145 e log-loss 0.078 → 0.078. EfficientNet-B0: T = 2.11 (suaviza as probabilidades); no teste, ECE 0.0087 → 0.0092 e log-loss 0.034 → 0.027. Os dois já saem bem calibrados (ECE ≤ 0,03). A temperatura melhora um pouco o log-loss, mas piora o ECE (YOLO 0.0050 → 0.0145; CNN 0.0087 → 0.0092) e a acurácia não muda; seguindo a regra da Aula 12 (não remendar quem já é honesto), não aplicamos a correção e entregamos os modelos como estão. A 1ª faixa (as imagens menos confiantes) é onde sobra algum excesso de confiança: prometeu 0.917 e aconteceu 0.898 no YOLO; 0.988 e 0.956 na CNN."
+ },
+ {
+  "arquivo": "12_gradcam_acertos.png",
+  "titulo": "Mapas de calor (Grad-CAM) em acertos — uma imagem por classe",
+  "mostra": "Imagem de RM original e, ao lado, o mapa de calor do que mais influenciou a decisão da CNN e do YOLO, para um exemplo correto de cada classe. Vermelho/amarelo = região mais importante.",
+  "ler": "Esperamos que o calor se concentre na região anatômica relevante (lesão ou área da hipófise), e não em bordas, fundo escuro ou artefatos. É uma leitura qualitativa: não prova causalidade.",
+  "resultado": "Nos exemplos mostrados, a EfficientNet-B0 concentra o calor na lesão visível (glioma e meningioma) e na região central da base do crânio no caso pituitary; em 'notumor', onde não há lesão, o calor se espalha por várias regiões. O YOLO tem foco mais fragmentado, com pontos quentes também em bordas e regiões periféricas (ex.: pituitary), de interpretação menos clara. Os dois modelos acertam as 4 imagens. (Interpretação feita pela inspeção visual desta execução; releia se trocar as imagens.)"
+ },
+ {
+  "arquivo": "13_gradcam_erros.png",
+  "titulo": "Mapas de calor (Grad-CAM) em imagens erradas",
+  "mostra": "Imagens de teste em que pelo menos um modelo errou (primeiro as que os dois erram), com o mapa de calor de cada modelo e a classe prevista (verde = certo, vermelho = errado).",
+  "ler": "Compare onde cada rede olhou quando errou: foco em região irrelevante ou difusa sugere falha de atenção; foco na lesão com classe errada sugere imagem ambígua entre tipos de tumor.",
+  "resultado": "No teste, 3 imagens foram erradas pelos dois modelos e 14 por apenas um (erros complementares). Linha 1 (glioma): a CNN olha para a massa brilhante mas a chama de meningioma (confusão entre tipos de tumor), enquanto o YOLO dispersa a atenção fora da massa e prevê 'notumor' — um falso negativo. Linhas 2 e 3: ambos erram; na linha 2 a CNN foca a região central da base do crânio, perto da hipófise (hipótese de confusão por proximidade anatômica, não validada com especialista). Linhas 4 e 5: a CNN acerta com foco na lesão e o YOLO erra com atenção dispersa. (Interpretação feita pela inspeção visual desta execução; o painel mostra 5 imagens.)"
+ },
+ {
+  "arquivo": "14_checklist_antivazamento.png",
+  "titulo": "Checklist antivazamento e reprodutibilidade (Aulas 01 e 14)",
+  "mostra": "Quatorze verificações da disciplina aplicadas ao projeto (teste guardado, estratificação, atalhos, duplicatas, normalização, plausibilidade, baseline, média ± desvio, comparação pareada, limiar, calibração, variância, reprodutibilidade, model card), cada uma com a evidência calculada neste notebook.",
+  "ler": "Aula 14: o vazamento não dá erro, dá um resultado bom; a rotina é auditar, remover e documentar. OK = verificação passou; ATENÇÃO = vale registrar no relatório; FALHA = corrigir antes de confiar no número.",
+  "resultado": "12 de 14 verificações OK, 1 com atenção e 1 com falha. Falha: Colunas/atributos auditados (atalhos). Atenção: Duplicatas/grupos entre treino e teste. A falha (atributos triviais da imagem preveem ≈93% das classes) é a principal ressalva do trabalho; as quase-duplicatas entre treino e teste tiveram o efeito medido no teste limpo."
+ }
+]

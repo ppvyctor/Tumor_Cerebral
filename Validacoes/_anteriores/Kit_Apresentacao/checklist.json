@@ -1,0 +1,86 @@
+[
+ {
+  "item": "Teste separado e guardado; nenhuma decisão tomada com ele",
+  "status": "ok",
+  "evidencia": "melhor época e limiar escolhidos na validação; teste só para reportar e auditar",
+  "aula": "Aula 01/05"
+ },
+ {
+  "item": "Divisão estratificada e conferida",
+  "status": "ok",
+  "evidencia": "maior diferença de proporção 1.5 p.p. (χ² p = 0.42)",
+  "aula": "Aula 05"
+ },
+ {
+  "item": "Colunas/atributos auditados (atalhos)",
+  "status": "falha",
+  "evidencia": "atributos triviais preveem 0.93 (acaso = 0.25)",
+  "aula": "Aula 14"
+ },
+ {
+  "item": "Duplicatas/grupos entre treino e teste",
+  "status": "atencao",
+  "evidencia": "101 imagens de teste (14.8%) com quase-duplicata no treino; teste limpo medido",
+  "aula": "Aula 06/14"
+ },
+ {
+  "item": "Normalização ajustada só no treino",
+  "status": "ok",
+  "evidencia": "média/desvio fixos do ImageNet; nada é ajustado nos dados de validação/teste",
+  "aula": "Aula 05"
+ },
+ {
+  "item": "Resultado plausível (desconfie de 99,9%)",
+  "status": "ok",
+  "evidencia": "teste 0.979 e 0.991; treino 0.999/1.000 é esperado em modo inferência",
+  "aula": "Aula 01"
+ },
+ {
+  "item": "Supera o classificador burro e a base de log-loss",
+  "status": "ok",
+  "evidencia": "acurácia 0.98/0.99 × dummy 0.25; log-loss bem abaixo de 1.39",
+  "aula": "Aula 02/03"
+ },
+ {
+  "item": "Média ± desvio reportados (não um número solto)",
+  "status": "ok",
+  "evidencia": "50 dobras: 0.979 ± 0.010 e 0.991 ± 0.006",
+  "aula": "Aula 06"
+ },
+ {
+  "item": "Comparação pareada e faixa de empate",
+  "status": "ok",
+  "evidencia": "CNN vence em 74% das 50 dobras; fora da faixa de empate do líder",
+  "aula": "Aula 12"
+ },
+ {
+  "item": "Limiar escolhido na validação e medido uma vez no teste",
+  "status": "ok",
+  "evidencia": "custo previsto × medido: 0.009 × 0.002 (CNN)",
+  "aula": "Aula 12"
+ },
+ {
+  "item": "Probabilidade honesta (calibração conferida)",
+  "status": "ok",
+  "evidencia": "ECE 0.0050 e 0.0087 (meta ≤ 0,03)",
+  "aula": "Aula 12"
+ },
+ {
+  "item": "Gap treino−validação baixo (variância)",
+  "status": "ok",
+  "evidencia": "2.84 p.p. (YOLO) e 1.12 p.p. (CNN); meta ≤ 3 p.p.",
+  "aula": "Aula 01/10"
+ },
+ {
+  "item": "Semente fixa e resultado reproduzível",
+  "status": "ok",
+  "evidencia": "semente 42; dif. máx. entre execuções 0e+00; vs. cache 2e-08",
+  "aula": "Aula 14"
+ },
+ {
+  "item": "Modelo salvo + metadados + model card",
+  "status": "ok",
+  "evidencia": "pesos (.pt), meta/args, hashes SHA-256 e model_card.md",
+  "aula": "Aula 14"
+ }
+]

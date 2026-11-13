@@ -1,0 +1,15 @@
+﻿Critério,YOLO11s-cls,EfficientNet-B0
+Acurácia no teste,ok,ok
+Acurácia no teste limpo (sem quase-duplicatas),ok,ok
+Menor recall entre as classes (teste),ok,ok
+Sensibilidade para tumor (teste),ok,ok
+AUC macro (teste),ok,ok
+Log-loss (teste),ok,ok
+Calibração: ECE (teste),ok,ok
+Variância: gap treino − validação,ok,ok
+Estabilidade: |gap validação − teste|,ok,ok
+Divisão estratificada,ok,ok
+Duplicatas entre treino e teste,atencao,atencao
+Atalhos de aquisição (atributos triviais),falha,falha
+Robustez: queda média de acurácia,falha,falha
+Determinismo (2 execuções iguais),ok,ok

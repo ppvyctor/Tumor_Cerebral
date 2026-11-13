@@ -1,0 +1,6 @@
+﻿index,YOLO11s-cls,EfficientNet-B0
+Épocas,93.0,100.0
+Melhor época,63.0,40.0
+Acurácia de validação (melhor),0.97099,0.9883973894126178
+Tempo de treino (min),801.2,230.5
+Loss de treino final,0.01374,0.0039462676699472

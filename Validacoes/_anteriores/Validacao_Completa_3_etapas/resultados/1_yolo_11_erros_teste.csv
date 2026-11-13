@@ -1,0 +1,15 @@
+Arquivo,Real,Previsto,Confiança,Quase-duplicata no treino?
+Te-gl_62_jpg.rf.e5510a0f35d1fd15d06d9a14cacfa330.jpg,glioma,notumor,0.7587923,False
+Te-gl_91_jpg.rf.a96f97376f7996206becc54f4d2d229f.jpg,glioma,meningioma,0.7450939,False
+Tr-gl_987_jpg.rf.be57035d7df07075c03d166f1106ef6c.jpg,glioma,meningioma,0.9834871,False
+Tr-me_1059_jpg.rf.2c6d37e0f90724baf37c99095ad3242d.jpg,meningioma,glioma,0.755627,False
+Tr-me_1110_jpg.rf.bd2e6b251286a3e461ee93767aaeb82a.jpg,meningioma,notumor,0.5488017,True
+Tr-me_154_jpg.rf.b8aaba76d406f4f2d0750adf76a860d1.jpg,meningioma,notumor,0.9864764,False
+Tr-me_239_jpg.rf.8298adfe4e358f3bad6ecbff3a197cea.jpg,meningioma,notumor,0.82587856,False
+Tr-me_541_jpg.rf.ff3001e3f67189b5d3f16efb07b5e648.jpg,meningioma,glioma,0.8916655,False
+Tr-me_807_jpg.rf.4180ce45eea266f1931ffe6c262fa0b7.jpg,meningioma,glioma,0.5463798,False
+Tr-me_964_jpg.rf.6d728af1f74ceef073eb6acf88f7cbd7.jpg,meningioma,pituitary,0.88644797,False
+Tr-no_150_jpg.rf.acce4f2b4a1c88b488981522ada4fe70.jpg,notumor,glioma,0.5191402,False
+Tr-no_905_jpg.rf.e1932eceb4626b8b3c26707a080af8eb.jpg,notumor,glioma,0.48324704,False
+Tr-pi_1255_jpg.rf.4a24eef12abfbc89962f61594be47a40.jpg,pituitary,meningioma,0.98952943,False
+Tr-pi_452_jpg.rf.159afcb1b8e82823924ff9bc67d6d4f7.jpg,pituitary,meningioma,0.967612,False

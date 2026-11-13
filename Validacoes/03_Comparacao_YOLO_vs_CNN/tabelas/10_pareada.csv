@@ -1,0 +1,11 @@
+﻿index,Teste,Validação
+Só a CNN acerta,11.0,26.0
+Só o YOLO acerta,3.0,2.0
+Ambos erram,3.0,
+Ambos acertam,664.0,
+McNemar p (exato),0.057373046875,3.032386302947998e-06
+Kappa entre modelos,0.9706075306872918,
+Acurácia do ensemble,0.9926578560939795,
+Dif. de acurácia CNN−YOLO (p.p.),1.173568281938327,
+IC 95% inf (p.p.),0.1468428781204012,
+IC 95% sup (p.p.),2.3494860499265746,

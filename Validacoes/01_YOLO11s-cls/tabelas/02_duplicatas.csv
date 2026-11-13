@@ -1,0 +1,4 @@
+﻿Subconjunto,n,Acurácia
+completo,681,0.9794419970631424
+limpo (sem quase-duplicata),570,0.9771929824561404
+só com quase-duplicata,111,0.990990990990991
