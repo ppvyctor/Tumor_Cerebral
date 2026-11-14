@@ -167,7 +167,7 @@ O dataset original está sob licença **CC BY 4.0**.
 
 ## 👤 Autor
 
-**Pedro Vyctor Almeida**  
+**Pedro Vyctor Carvalho de Almeida**  
 Estudante de Ciência de Dados e Inteligência Artificial — PUC-SP
 
 [![GitHub](https://img.shields.io/badge/GitHub-ppvyctor-181717?logo=github)](https://github.com/ppvyctor)
